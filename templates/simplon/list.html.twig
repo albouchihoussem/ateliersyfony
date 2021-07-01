@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+ 
+    </head>
+    <body>
+    <h1>{{formation|length}}</h1>
+     {% set nbtotal = 0 %} 
+     {% for p in formation %}
+     {% set nbtotal = nbtotal + p.nb_participants %}
+     {% endfor %}
+     <h1> Le nombre total de participants est {{nbtotal}} </h1>
+
+
+    {% set nbmax = 0 %}  {##}
+    {% for m in formation %}
+      {% set nbmax = max(m.nb_participants,nbmax) %}
+
+
+    {% endfor %}
+ 
+    <table border="1">
+    <tr>
+    <th>Référence</th>
+     <th>Titre</th>
+      <th>Description</th>
+       <th>Date-début</th>
+      <th>Date-fin</th>
+        <th>Nombre participants</th>
+    <tr/>
+    {% for f in formation %}
+  
+    <tr>
+    {#{% if "theorique" in f.Description %}
+    #}
+    {% if f.nb_participants == nbmax %}
+    <td>{{f.ref}}</td>
+    <td>{{f.Titre|upper}}</td>
+    <td>{{f.Description}}</td>
+    <td>{{f.date_debut}}</td>
+    <td>{{f.date_fin}}</td>
+    <td>{{f.nb_participants}}</td>
+        {% endif %}
+        {#{% endif %}#}
+
+    <tr/>
+
+{% endfor %}
+    </table>
+      </body>
+</html>
